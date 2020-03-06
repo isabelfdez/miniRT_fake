@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 20:41:53 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/03 21:18:45 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/03/06 19:18:29 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,49 @@ int main()
 		i++;
 	}
 	i = 80;
-	j = 80;
 	while (i < 120)
 	{
-		j = 25;
+		j = 80;
 		while (j < 120)
 		{
 			if (condition(i, j))
-				mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0xFFFF00);
+				mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0xFFFFFF);
 			j++;
 		}
 		i++;
+	}
+	j = 200;
+	while (j < 275)
+	{
+		i = 200;
+		while (i <= j)
+		{
+			mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0x00FF00);
+			i++;
+		}
+		j++;
+	}
+	j = 20;
+	while (j < 60)
+	{
+		i = 100;
+		while (i <= (j + 80))
+		{
+			mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0x00BBAA);
+			i++;
+		}
+		j++;
+	}
+	j = 100;
+	while (j < 150)
+	{
+		i = 150;
+		while (i <= ((j - 150) * (1 / 150 * 170) + 170))
+		{
+			mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0x00BBAA);
+			i++;
+		}
+		j++;
 	}
 	mlx_loop(mlx_ptr);
 }
