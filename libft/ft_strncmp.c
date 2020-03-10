@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/21 12:52:45 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/10 13:31:44 by isfernan         ###   ########.fr       */
+/*   Created: 2019/11/15 17:07:42 by isfernan          #+#    #+#             */
+/*   Updated: 2019/11/30 20:18:03 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "/Users/isfernan/42cursus/miniRT/miniRT_fake/libft/libft.h"
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
-void	ft_gnl(char *buff[], char **line, int *nb, int fd);
-int		ft_read(int fd, char str[], char *buff[]);
-int		get_next_line(int fd, char **line);
-#endif
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while ((str1[i] || str2[i]) && i < n)
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
+	}
+	return (0);
+}

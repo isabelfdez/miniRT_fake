@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/21 12:52:45 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/10 13:31:44 by isfernan         ###   ########.fr       */
+/*   Created: 2019/12/06 23:23:29 by isfernan          #+#    #+#             */
+/*   Updated: 2019/12/06 23:24:43 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "/Users/isfernan/42cursus/miniRT/miniRT_fake/libft/libft.h"
-
-void	ft_gnl(char *buff[], char **line, int *nb, int fd);
-int		ft_read(int fd, char str[], char *buff[]);
-int		get_next_line(int fd, char **line);
-#endif
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	(void)lst;
+	(void)del;
+}

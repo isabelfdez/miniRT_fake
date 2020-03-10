@@ -6,22 +6,12 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 12:40:42 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/06 18:08:56 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/03/10 13:22:01 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #define BUFFER_SIZE 2
-
-size_t		ft_strlen(const char *s)
-{
-	size_t		i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 void		ft_gnl(char *buff[], char **line, int *nb, int fd)
 {
@@ -29,7 +19,7 @@ void		ft_gnl(char *buff[], char **line, int *nb, int fd)
 	char		*buffcpy;
 	int			nl;
 
-	nl = ft_strchr(buff[fd], '\n');
+	nl = ft_strchr2(buff[fd], '\n');
 	if (nl != -1)
 	{
 		*nb = 1;
@@ -67,7 +57,7 @@ int			ft_read(int fd, char str[], char *buff[])
 			free(buff[fd]);
 			buff[fd] = aux;
 		}
-		if (ft_strchr(buff[fd], '\n') != -1)
+		if (ft_strchr2(buff[fd], '\n') != -1)
 			break ;
 	}
 	return (nb);
@@ -82,7 +72,7 @@ int			get_next_line(int fd, char **line)
 	nb = 0;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0 || fd >= 4096)
 		return (-1);
-	if (!buff[fd] || (ft_strchr(buff[fd], '\n')) == -1)
+	if (!buff[fd] || (ft_strchr2(buff[fd], '\n')) == -1)
 		nb = ft_read(fd, str, buff);
 	if (!(nb) && !buff[fd])
 	{

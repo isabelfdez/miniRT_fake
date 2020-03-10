@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/21 12:52:45 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/10 13:31:44 by isfernan         ###   ########.fr       */
+/*   Created: 2019/11/14 21:08:25 by isfernan          #+#    #+#             */
+/*   Updated: 2019/11/28 14:51:23 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "/Users/isfernan/42cursus/miniRT/miniRT_fake/libft/libft.h"
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	*s_cast;
+	unsigned char	c2;
+	size_t			i;
 
-void	ft_gnl(char *buff[], char **line, int *nb, int fd);
-int		ft_read(int fd, char str[], char *buff[]);
-int		get_next_line(int fd, char **line);
-#endif
+	s_cast = (unsigned char *)s;
+	i = 0;
+	c2 = c;
+	while (i < n)
+	{
+		if (s_cast[i] == c2)
+			return ((void *)s_cast + i);
+		i++;
+	}
+	return (NULL);
+}

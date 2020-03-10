@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/21 12:52:45 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/10 13:31:44 by isfernan         ###   ########.fr       */
+/*   Created: 2019/11/04 16:08:39 by isfernan          #+#    #+#             */
+/*   Updated: 2019/11/28 17:15:01 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "/Users/isfernan/42cursus/miniRT/miniRT_fake/libft/libft.h"
-
-void	ft_gnl(char *buff[], char **line, int *nb, int fd);
-int		ft_read(int fd, char str[], char *buff[]);
-int		get_next_line(int fd, char **line);
-#endif
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, '\0', n);
+}

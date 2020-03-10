@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/21 12:52:45 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/10 13:31:44 by isfernan         ###   ########.fr       */
+/*   Created: 2019/11/12 19:31:50 by isfernan          #+#    #+#             */
+/*   Updated: 2019/11/28 14:55:27 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "/Users/isfernan/42cursus/miniRT/miniRT_fake/libft/libft.h"
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	char	*src_cast;
+	char	*dst_cast;
+	size_t	i;
 
-void	ft_gnl(char *buff[], char **line, int *nb, int fd);
-int		ft_read(int fd, char str[], char *buff[]);
-int		get_next_line(int fd, char **line);
-#endif
+	i = 0;
+	if (!n || dst == src)
+		return (dst);
+	src_cast = (char *)src;
+	dst_cast = (char *)dst;
+	while (i < n)
+	{
+		dst_cast[i] = src_cast[i];
+		i++;
+	}
+	return (dst);
+}

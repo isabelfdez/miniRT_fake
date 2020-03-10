@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/21 12:52:45 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/10 13:31:44 by isfernan         ###   ########.fr       */
+/*   Created: 2019/11/14 18:55:37 by isfernan          #+#    #+#             */
+/*   Updated: 2019/11/28 17:10:39 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "/Users/isfernan/42cursus/miniRT/miniRT_fake/libft/libft.h"
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	char	*dst2;
+	char	*src2;
+	size_t	i;
 
-void	ft_gnl(char *buff[], char **line, int *nb, int fd);
-int		ft_read(int fd, char str[], char *buff[]);
-int		get_next_line(int fd, char **line);
-#endif
+	dst2 = (char *)dst;
+	src2 = (char *)src;
+	i = 0;
+	if (!len || dst == src)
+		return (dst);
+	if (src > dst)
+		dst2 = ft_memcpy(dst, src, len);
+	else
+		while (i < len)
+		{
+			dst2[len - i - 1] = src2[len - i - 1];
+			i++;
+		}
+	return (dst);
+}

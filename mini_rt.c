@@ -6,56 +6,14 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:46:33 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/06 20:06:52 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/03/10 20:00:19 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// Tengo que corregir lo de que también se salte los símbolos -
+// Hay que tratar los errores
+
 #include "mini_rt.h"
-
-int		ft_atoi(const char *str)
-{
-	int		i;
-	int		neg;
-	int		nb;
-
-	i = 0;
-	neg = 0;
-	nb = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			neg++;
-		i++;
-	}
-	while ('0' <= str[i] && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i] - '0');
-		i++;
-	}
-	if (neg == 1)
-		nb = nb * (-1);
-	return (nb);
-}
-
-int		count_nb(int nb)
-{
-	int				rtrn;
-	long long int	i;
-
-	rtrn = 0;
-	i = 1;
-	while (nb / i)
-	{
-		i = i * 10;
-		rtrn++;
-	}
-	if (nb <= 0)
-		rtrn = rtrn + 1;
-	return (rtrn);
-}
-
 
 int	main(int argc, char **argv)
 {
@@ -99,10 +57,10 @@ void	ft_readfile(char *aux)
 	printf("%c %i\n", aux[j], j);
 	if (aux[j] == 'A')
 		j = ft_ambient(aux, j + 1, data);
-	/*if (aux[j] == 'c')
+	if (aux[j] == 'c')
 		j = ft_camera(aux, j + 1, data);
 	if (aux[j] == 'l')
-		j = ft_light(aux, j + 1, data);*/
+		j = ft_light(aux, j + 1, data);
 	/* Hay que ver qué hacemos con las figuras */
 }
 
@@ -111,7 +69,6 @@ int	ft_resolution(char *aux, int i, t_data *data)
 	while (aux[i] == ' ')
 		i++;
 	data->resx = ft_atoi(aux + i);
-
 	while (ft_isdigit(aux[i]) || aux[i] == ' ')
 		i++;
 	data->resy = ft_atoi(aux + i);
@@ -123,46 +80,100 @@ int	ft_resolution(char *aux, int i, t_data *data)
 
 int	ft_ambient(char *aux, int i, t_data *data)
 {
-	float	nb;
-
 	while (aux[i] == ' ')
 		i++;
-	nb = ft_atoi(aux + i);
-	if (aux[++i] == '.' )
-	{
-		printf("la i es %i\n el numero es %i\n las cifras son %i\n", 
-			i, ft_atoi(aux + i + 1), count_nb(ft_atoi(aux + i + 1)));
-		nb = nb + ((float)(ft_atoi(aux + i + 1)) / (float)(powf(10.0, (float)count_nb(ft_atoi(aux + i + 1)))));
-		data->al_ratio = nb;
-	}
-	while (ft_isdigit(aux[i]) || aux[i] == '.' || aux[i] == ' ')
+	data->al_ratio = ft_atof(aux, i);
+	while (ft_isdigit(aux[i]) || aux[i] == '.')
+		i++;
+	while (aux[i] == ' ')
 		i++;
 	data->al_col.x = ft_atoi(aux + i);
-	while (aux[i] == ' ' || aux[i] == ',')
-		i++;
+	i = i + count_nb(data->al_col.x) + 1; /* Saltamos 1 por la coma */
 	data->al_col.y = ft_atoi(aux + i);
-	while (aux[i] == ' ' || aux[i] == ',')
-		i++;
+	i = i + count_nb(data->al_col.y) + 1;
 	data->al_col.z = ft_atoi(aux + i);
+	i = i + count_nb(data->al_col.z);
 	while (aux[i] == ' ' || aux[i] == '\n')
 		i++;
-	printf("alratio = %f", data->al_ratio);
 	return (i);
 }
 
-
-
-int		ft_isdigit(int c)
+int		ft_camera(char *aux, int i, t_data *data)
 {
-	if (48 <= c && c <= 57)
-		return (1);
-	else
-		return (0);
+	t_pointf st;
+	t_pointf end;
+
+	st.x = 0;
+	st.y = 0;
+	st.z = 0;
+	while (aux[i] == ' ')
+		i++;
+	data->c_coor.x = ft_atof(aux, i);
+	i = skip_nsm(i, aux);
+	data->c_coor.y = ft_atof(aux, i);
+	i = skip_nsm(i, aux);
+	data->c_coor.z = ft_atof(aux, i);
+	i = skip_nsm(i, aux);
+	while (aux[i] == ' ')
+		i++;
+	data->c_ori.start = st;
+	end.x = ft_atof(aux, i);
+	i = skip_nsm(i, aux);
+	end.y = ft_atof(aux, i);
+	i = skip_nsm(i, aux);
+	end.z = ft_atof(aux, i);
+	i = skip_nsm(i, aux) - 1;
+	data->c_ori.end = end;
+	while (aux[i] == ' ')
+		i++;
+	data->c_fov = ft_atof(aux, i);
+	while (aux[i] == ' ' || aux[i] == '\n')
+		i++;
+	printf("las coordenadas son: %f,%f,%f\nla orintación es %f,%f,%f  %f,%f,%f y el fov es %f", 
+		data->c_coor.x, data->c_coor.y, data->c_coor.z, data->c_ori.start.x, data->c_ori.start.y,
+		data->c_ori.start.z, data->c_ori.end.x, data->c_ori.end.y, data->c_ori.end.z, data->c_fov);
+	return (i);	
 }
 
-/*void	to_base(unsigned int nb, char *base, t_data *data)
+int		ft_light(char *aux, int i, t_data *data)
 {
-	if (nb >= (unsigned int)ft_strlen(base))
-		to_base(nb / (ft_strlen(base)), base, data);
-	putchr_add(nb % ft_strlen(base), base, data);
-}*/
+	while (aux[i] == ' ')
+		i++;
+	data->l_coor.x = ft_atof(aux, i);
+	i = skip_nsm(i, aux);
+	data->l_coor.y = ft_atof(aux, i);
+	i = skip_nsm(i, aux);
+	data->l_coor.z = ft_atof(aux, i);
+	i = skip_nsm(i, aux);
+	while (aux[i] == ' ')
+		i++;
+	data->l_int = ft_atof(aux, i);
+	i = skip_ns(i, aux);
+	while (aux[i] == ' ')
+		i++;
+	data->l_col.x = ft_atoi(aux + i);
+	i = i + count_nb(data->al_col.x) + 1; /* Saltamos 1 por la coma */
+	data->l_col.y = ft_atoi(aux + i);
+	i = i + count_nb(data->al_col.y) + 1;
+	data->l_col.z = ft_atoi(aux + i);
+	i = i + count_nb(data->al_col.z);
+	while (aux[i] == ' ' || aux[i] == '\n')
+		i++;
+	return (i);	
+}
+
+int		skip_nsm(int i, char *aux)
+{
+	while (ft_isdigit(aux[i]) || aux[i] == '.' || aux[i] == '-')
+		i++;
+	i = i + 1; /* Para saltarse la coma */
+	return (i);
+}
+
+int		skip_ns(int i, char *aux)
+{
+	while (ft_isdigit(aux[i]) || aux[i] == '.')
+		i++;
+	i = i + 1; /* Para saltarse la coma */
+	return (i);
+}

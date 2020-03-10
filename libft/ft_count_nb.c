@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_count_nb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/21 12:52:45 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/10 13:31:44 by isfernan         ###   ########.fr       */
+/*   Created: 2020/03/10 16:17:29 by isfernan          #+#    #+#             */
+/*   Updated: 2020/03/10 16:18:35 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+/*
+** This function counts the digits of a given integer.
+** If the integer given is 0, 1 is returned
+*/
 
-# include "/Users/isfernan/42cursus/miniRT/miniRT_fake/libft/libft.h"
+int		count_nb(int nb)
+{
+	int				rtrn;
+	long long int	i;
 
-void	ft_gnl(char *buff[], char **line, int *nb, int fd);
-int		ft_read(int fd, char str[], char *buff[]);
-int		get_next_line(int fd, char **line);
-#endif
+	rtrn = 0;
+	i = 1;
+	while (nb / i)
+	{
+		i = i * 10;
+		rtrn++;
+	}
+	if (nb <= 0)
+		rtrn = rtrn + 1;
+	return (rtrn);
+}

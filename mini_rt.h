@@ -6,7 +6,7 @@
 /*   By: isfernan <isfernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 14:35:31 by isfernan          #+#    #+#             */
-/*   Updated: 2020/03/06 19:20:17 by isfernan         ###   ########.fr       */
+/*   Updated: 2020/03/10 19:53:55 by isfernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "mlx.h"
 # include "./get_next_line/get_next_line.h"
-# include <math.h>
+# include "./libft/libft.h"
 
 typedef	struct	s_pointf
 {
@@ -90,7 +90,7 @@ typedef struct  s_data
 	t_pointi	al_col;
 	t_pointf	c_coor;
 	t_vectorf	c_ori;
-	float		fov;
+	float		c_fov;
 	t_vectorf	l_coor;
 	float		l_int;
 	t_pointi	l_col;
@@ -100,7 +100,12 @@ typedef struct  s_data
 void	ft_readfile(char *aux);
 int		ft_resolution(char *aux, int i, t_data *data);
 int		ft_ambient(char *aux, int i, t_data *data);
-int		ft_isdigit(int c);
+int		ft_camera(char *aux, int i, t_data *data);
+int		skip_nsm(int i, char *aux);
+int		skip_ns(int i, char *aux);
+
+
+
 
 
 
